@@ -1,0 +1,34 @@
+---
+layout: default
+main_count: 8
+dis_char_num: 100
+---
+<div class="home">
+
+  <ul class="posts">
+    {% for post in site.posts limit: page.main_count %}
+    <li>
+      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+	{{ post.title }}</a>
+      <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <br/>
+    <span class="posts">
+      {{ post.content | strip_html: | truncate: page.dis_char_num | escape: }}"
+    </span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <br/>
+  <ul class="posts">
+  {% if page.main_count < site.posts.size %}
+    <span class="posts">
+    (more)...
+    </span>
+  {% endif %}
+  </ul>
+
+
+
+
+</div>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>言語めも</title>
+    <description>言語、超入門。または自分の学習の足跡集</description>
+    <link>./</link>
+    <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 05 Apr 2016 21:55:12 +0900</pubDate>
+    <lastBuildDate>Tue, 05 Apr 2016 21:55:12 +0900</lastBuildDate>
+    <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>分岐</title>
+        <description>
+&lt;h1 id=&quot;if-&quot;&gt;単純な if 文&lt;/h1&gt;
+&lt;p&gt;形式は &lt;code&gt;if ～ else ～ fi&lt;/code&gt; となる。&lt;/p&gt;
+
+&lt;p&gt;/home/mon/github/repository/pages/lang/_posts/2016-05-01-sh-selection.md&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/selection.sh&quot;&gt;helloworld.sh&lt;/a&gt;&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;echo &amp;quot;Hello World&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+</description>
+        <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
+        <link>./sh/2016/05/01/sh-selection/</link>
+        <guid isPermaLink="true">./sh/2016/05/01/sh-selection/</guid>
+        
+        <category>selection</category>
+        
+        
+        <category>sh</category>
+        
+      </item>
+    
+      <item>
+        <title>インストール</title>
+        <description>&lt;p&gt;大抵の unix システムには最初から入っているので、特にインストール作業は不要。&lt;/p&gt;
+
+&lt;p&gt;ただ、OS によって微妙にデフォルトが異なったり、挙動が異なったりするので
+どこを前提とするのか、注意が必要。&lt;/p&gt;
+
+&lt;p&gt;POSIX 準拠が使いたいとか、bash が使いたいとか、zsh が使いたいとかの
+場合はそれをインストールする。さらに /bin/sh として使いたいなら
+そう設定する。&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
+        <link>./sh/2016/05/01/sh-install/</link>
+        <guid isPermaLink="true">./sh/2016/05/01/sh-install/</guid>
+        
+        <category>install</category>
+        
+        
+        <category>sh</category>
+        
+      </item>
+    
+      <item>
+        <title>ハローワールド</title>
+        <description>
+&lt;h1 id=&quot;section&quot;&gt;スクリプトを作成する&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/helloworld.sh&quot;&gt;helloworld.sh&lt;/a&gt;という名前のファイルを、以下の内容で作成する。&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;echo &amp;quot;Hello World&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;実行属性をつける。&lt;/h1&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;$ chmod u+x helloworld.sh
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;$ ls -F helloworld.sh
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;helloworld.sh*
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;-F を指定した場合、実行属性が設定されていると、ファイル名の後ろに ‘*’ が付く。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;実行する&lt;/h1&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;$ ./helloworld.sh
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;Hello World
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
+        <link>./sh/2016/05/01/sh-helloworld/</link>
+        <guid isPermaLink="true">./sh/2016/05/01/sh-helloworld/</guid>
+        
+        <category>helloworld</category>
+        
+        
+        <category>sh</category>
+        
+      </item>
+    
+      <item>
+        <title>反復</title>
+        <description>&lt;p&gt;ループ。または繰り返し。&lt;/p&gt;
+
+&lt;p&gt;for 文、while 文。回数ループ、条件によって脱出する辺りが多い。
+あるいは、配列の全要素を取りあげる for ～ in 文など。&lt;/p&gt;
+</description>
+        <pubDate>Wed, 06 Apr 2016 00:00:00 +0900</pubDate>
+        <link>./all/2016/04/06/all-iteration/</link>
+        <guid isPermaLink="true">./all/2016/04/06/all-iteration/</guid>
+        
+        <category>iteration</category>
+        
+        
+        <category>all</category>
+        
+      </item>
+    
+      <item>
+        <title>分岐</title>
+        <description>&lt;p&gt;条件分岐。&lt;/p&gt;
+
+&lt;p&gt;if 文、ブロック if 文、case （switch）文辺りが良くある構文。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 04 Apr 2016 00:00:00 +0900</pubDate>
+        <link>./all/2016/04/04/all-selection/</link>
+        <guid isPermaLink="true">./all/2016/04/04/all-selection/</guid>
+        
+        <category>selection</category>
+        
+        
+        <category>all</category>
+        
+      </item>
+    
+      <item>
+        <title>順接</title>
+        <description>&lt;p&gt;順接。以前は連接とも言っていたと思う。&lt;/p&gt;
+
+&lt;p&gt;書いてある順に実行されること。&lt;/p&gt;
+
+&lt;p&gt;バカみたいな気もするが、もしって考えると結構大事。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 03 Apr 2016 00:00:00 +0900</pubDate>
+        <link>./all/2016/04/03/all-sequence/</link>
+        <guid isPermaLink="true">./all/2016/04/03/all-sequence/</guid>
+        
+        <category>sequence</category>
+        
+        
+        <category>all</category>
+        
+      </item>
+    
+      <item>
+        <title>ハローワールド</title>
+        <description>&lt;p&gt;最初のサンプル。&lt;/p&gt;
+
+&lt;p&gt;C 言語の例の本以来の伝統。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 02 Apr 2016 00:00:00 +0900</pubDate>
+        <link>./all/2016/04/02/all-helloworld/</link>
+        <guid isPermaLink="true">./all/2016/04/02/all-helloworld/</guid>
+        
+        <category>helloworld</category>
+        
+        
+        <category>all</category>
+        
+      </item>
+    
+      <item>
+        <title>インストール</title>
+        <description>&lt;p&gt;環境は &lt;a href=&quot;http://www.debian.org/&quot;&gt;Debian&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;導入するにはパッケージをインストールする。
+実行するには apt-get 、または aptitude コマンドを使う。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 01 Apr 2016 00:00:00 +0900</pubDate>
+        <link>./all/2016/04/01/all-install/</link>
+        <guid isPermaLink="true">./all/2016/04/01/all-install/</guid>
+        
+        <category>install</category>
+        
+        
+        <category>all</category>
+        
+      </item>
+    
+  </channel>
+</rss>

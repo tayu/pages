@@ -1,0 +1,17 @@
+# Site settings
+title: 言語めも
+description: "言語、超入門。または自分の学習の足跡集"
+
+# ABH
+## サイト出力先
+destination: ../main/lang
+## ベース URL
+permalink: pretty
+baseurl: "."
+# Markdown レンダラ
+highlighter: pygments
+## マークダウン
+kramdown:
+  input: GFM
+  hard_wrap: false
+
