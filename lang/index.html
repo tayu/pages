@@ -3,56 +3,41 @@ layout: default
 encoding: UTF-8
 lang: 言語
 # タグから表示名を得るためのデータ
-theme_list: [ install, helloworld, sequence, selection, iteration ]
-theme_name_list: [ インストール, ハローワールド, 順接, 分岐, 反復 ]
-lang_list: [ all, sh, ruby ]
-lang_lname_ist: [ 共通, シェルスクリプト, ruby ]
+# リストを配列にし、名前をハッシュで持つ
+Language: [ all, sh, ruby, go ]
+LanguageNames: { all: 共通, sh: シェルスクリプト, ruby: Ruby, go: GO }
+Themes: [ install, helloworld, sequence, selection, iteration ]
+ThemesName: { install: インストール, helloworld: ハローワールド, sequence: 順接, selection: 分岐, iteration: 反復 }
 ---
 <div class="home">
   <h1>一覧</h1>
 
+  {% comment %}
+  言語、テーマでジャンプマトリックスを作る
+  {% endcomment %}
   <table>
+    {% comment %}横見出し：言語{% endcomment %}
     <tr>
       <th>テーマ／言語</th>
-      {% comment %}
-      page.theme_list 順でも良いのだが、日付で順番付けができたので
-      {% endcomment %}
-      {% comment %}
-      Liquid  で配列とかハッシュアクセスが使えないので面倒な事に
-      {% endcomment %}
-      {% comment %}横見出し：言語{% endcomment %}
-      {% for name in page.lang_lname_ist %}
-      <th>{{ name }}</th>
+      {% for lang in page.Language %}
+      <th>{{ page.LanguageNames[lang] }}</th>
       {% endfor %}
     </tr>
     {% comment %}縦見出し：テーマ{% endcomment %}
-    {% assign index = -1 %}
-    {% for theme in page.theme_list %}
+    {% for theme in page.Themes %}
     <tr>
-      {% comment %}テーマ文字列{% endcomment %}
-      {% assign index = index | plus: 1 %}
-      {% assign i = 0 %}
-      {% assign name = "" %}
-      {% for nm in page.theme_name_list %}
-      {% if i == index %}
-      {% assign name = nm %}
-      {% break %}
-      {% else %}
-      {% assign i = i | plus: 1  %}
-      {% endif %}
-      {% endfor %}
-      <th>{{ name }}</th>
-      {% comment %}言語／テーマに一致するものをサーチ{% endcomment %}
-      {% for lang in page.lang_list %}
+      <th>{{ page.ThemesName[theme] }}</th>
+      {% for lang in page.Language %}
       <td>
-	{% assign f_hit = false %}
+	{% assign foundp = false %}
 	{% for post in site.posts %}
 	{% if lang == post.categories.first and theme == post.tags.first %}
-	{% assign f_hit = true %}
+	{% assign foundp = true %}
 	{% assign url = post.url %}
+	{% break %}
 	{% endif %}
 	{% endfor %}
-	{% if f_hit %}
+	{% if foundp %}
 	<a href="{{ url | prepend: site.baseurl }}">○</a>
 	{% endif %}
       </td>
@@ -60,5 +45,4 @@ lang_lname_ist: [ 共通, シェルスクリプト, ruby ]
     </tr>
     {% endfor %}
   </table>
-
 </div>

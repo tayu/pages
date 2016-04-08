@@ -7,7 +7,7 @@
     <title>言語めも</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="言語、超入門。または自分の学習の足跡集">
-    <link rel="canonical" href="./">
+    <link rel="canonical" href="./.bak2">
 
     <!-- Custom CSS -->
     
@@ -15,7 +15,9 @@
     
     
     
-    <link rel="stylesheet" href="./css/main.css">
+    
+    
+    <link rel="stylesheet" href="./../css/main.css">
 
 </head>
 
@@ -26,7 +28,7 @@
 
   <div class="wrap">
 
-    <a class="site-title" href=".//">言語めも</a>
+    <a class="site-title" href="./..//">言語めも</a>
 
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -63,27 +65,37 @@
       <div class="home">
   <h1>一覧</h1>
 
-  
   <table>
-    
     <tr>
       <th>テーマ／言語</th>
+      
+      
+      
       
       <th>共通</th>
       
       <th>シェルスクリプト</th>
       
-      <th>Ruby</th>
-      
-      <th>GO</th>
+      <th>ruby</th>
       
     </tr>
     
     
+    
     <tr>
+      
+      
+      
+      
+      
+      
+      
+      
       <th>インストール</th>
       
+      
       <td>
+	
 	
 	
 	
@@ -119,29 +131,20 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<a href="./sh/2016/05/01/sh-install/">○</a>
-	
-      </td>
-      
-      <td>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
       </td>
       
@@ -170,9 +173,25 @@
     </tr>
     
     <tr>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <th>ハローワールド</th>
       
+      
       <td>
+	
+	
+	
 	
 	
 	
@@ -197,6 +216,17 @@
       </td>
       
       <td>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -234,34 +264,34 @@
 	
       </td>
       
-      <td>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-      </td>
-      
     </tr>
     
     <tr>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <th>順接</th>
       
+      
       <td>
+	
+	
+	
+	
+	
 	
 	
 	
@@ -327,34 +357,40 @@
 	
       </td>
       
-      <td>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-      </td>
-      
     </tr>
     
     <tr>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <th>分岐</th>
       
+      
       <td>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -375,6 +411,21 @@
       </td>
       
       <td>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -408,34 +459,46 @@
 	
       </td>
       
-      <td>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-      </td>
-      
     </tr>
     
     <tr>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <th>反復</th>
       
+      
       <td>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -497,31 +560,10 @@
 	
       </td>
       
-      <td>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-      </td>
-      
     </tr>
     
   </table>
+
 </div>
 
       </div>

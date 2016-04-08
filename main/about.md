@@ -3,6 +3,6 @@ layout: page
 title: About
 permalink: /about/
 ---
-# 私について
+# ページについて
 
 そのうち書く
