@@ -29,8 +29,8 @@ task :up do
 end
 
 task :pages do
-  cwd = ENV[ 'PWD' ]
-  sh "echo  '#{cwd}'"
+  # cwd = ENV[ 'PWD' ]
+  # sh "echo  '#{cwd}'"
   chdir "../tayu.github.io"
 end
 
