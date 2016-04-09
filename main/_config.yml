@@ -6,6 +6,7 @@ description: "作業めも等。日記、雑記、その他何でも"
 ## サイト出力先
 destination: ../../tayu.github.io
 ## ベース URL
+## パーマリンクスタイル: Not pretty
 permalink: pretty
 baseurl: "."
 # Markdown レンダラ

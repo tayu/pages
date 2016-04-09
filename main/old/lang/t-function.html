@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP"><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0," /><link rel="stylesheet" type="text/css" href="main.css" /><link rel="shortcut icon" href="favicon.ico" /><title>t-function</title
+></head
+><body><h2>関数／手続き
+</h2>
+<hr>
+<p>一連の処理をまとめる。
+</p>
+<p>値を返すものを「関数」、返さないものを「手続き」と呼ぶ。
+これは Pascal で見たのが最初だったなぁ。
+</p>
+<p>外部からパラメータを渡す手段として、「引数」がある。
+まぁ、値の返しかたとも関連するのだが、値の受け渡しは
+大域変数を使うってやり方も有るにはある。
+</p>
+<p>ただし、大域変数を使うと修正時に影響範囲を確定できなくて、
+思わぬところに影響が出る事もある。つまり、バグ。
+</p>
+<p>なので、局所性、独立性を高める作り方が結局は安くつく。すなわち、良い作法。
+</p>
+<p>ただ、複数の値を返す場合はどうするとか、そうもできない場面もある。
+構造体とかポインタとか使うかなぁ。
+（初期の C なんかだと構造体を返すってのはできなかった。
+なのでポインタ渡しの需要があった）
+</p>
+<h3>引数の渡し方
+</h3>
+<p>参照渡しか値渡しかって話。参照渡しなら、関数内での変更が呼び出し元に反映
+される。副作用を伴う、って言い方もできる。
+</p>
+<p>明示的に指定する場合は良い。指定が無い、もしくは省略された時の挙動は
+言語毎に異なる。また、コピーが伴うとパフォーマンスに影響する。
+そういう意味で、確認は大事。
+</p>
+<h3>どういう場合に関数化するか
+</h3>
+<p>基本は機能単位。
+</p>
+<p>ただ、単に長くなりすぎた処理をを適当にまとめてしまう事にも使われる。
+これはこれで見通しが良くなるのでアリだと思う。まぁ、影響も、
+再利用の無い関数群が大量に作成されるだけだし。
+</p></body
+></html
+>

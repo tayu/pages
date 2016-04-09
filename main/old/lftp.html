@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP"><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0," /><link rel="stylesheet" type="text/css" href="main.css" /><link rel="shortcut icon" href="favicon.ico" /><title>lftp</title
+></head
+><body><h2>lftp でミラーリング
+</h2>
+<p>某所の HP を更新するのに <a href="http://lftp.yar.ru/">lftp</a> を使う
+</p>
+<hr>
+<p>ここで雑多な話をするのもどうかと思うので、
+そちらは別にした。アップロードが ftp なので、
+ローカルとのミラーリングをすることにした。
+</p>
+<p>で、何を使おうかな、と考えた。
+</p>
+<h3>lftp を選んだ経緯
+</h3>
+<p>まぁ、<a href="http://sourceforge.jp/projects/ffftp/">FFFTP</a> や
+<a href="http://sourceforge.jp/projects/filezilla/">FileZilla</a> でも良いのだけど、
+Linux 上で書いているので、スクリプト 1 発がやはり便利。
+</p>
+<p>以前は mirror ってスクリプトを使っていたけど、今は Debian には無かった。
+ほぼ同じもので ftpmirror ってのもあって、こちらは今もパッケージが
+ある。
+</p>
+<p>何となく、最初から探してみたくて検索してたら、
+バックアップなら <a href="http://rsync.samba.org/">rsync</a> って
+感じが多かった。
+ただ、動作を考えてみたら、これって結局サーバ側で
+協調して動くrsync daemon が必要だよなぁ。
+</p>
+<p>で、途中で lftp でミラーしてるって記述が有ったので試してみる事に。
+</p>
+<h3>lftp の印象
+</h3>
+<p>とにかく豊富なコマンド群。しかも半ば shell としても使える、との事。
+これでスクリプトが書けるかなぁ？
+</p>
+<h3>lftp でスクリプト
+</h3>
+<p>試してみたら、実行できた。
+</p>
+<p>例えば、以下の様なスクリプトを作る
+</p>
+<pre>#! /usr/bin/lftp -f
+echo "connect to SERVER"
+open -u USER,PASS SERVER
+get SOMEFILE
+close
+!ls
+</pre>
+<p>lftp に "-f" を指定する都合上、/usr/bin/env は使えない。
+上記の例ではサーバに接続してファイルを取得する他に、
+内部コマンドの echo 、外部コマンドの ls を実行している。
+</p>
+<h3>lftp でスクリプト（ヒアドキュメント）
+</h3>
+<p>前項の形式でも良いのだが、個人的な好みとして、設定をなるべく固めて
+おきたいってのがある。大抵はファイルの先頭で変数に設定する。
+</p>
+<p>で、調べたら、lftp には変数が無かった。いや、変数は有るのだが、
+それはあらかじめ作成済みの、動作オプションだった。
+</p>
+<p>なので、結局ふつーのスクリプトとして作成した。
+</p>
+<pre>#! /bin/sh
+SERVER="www.example.com"
+USER="username"
+PASS="userpass"
+LOCALDIR="htdocs"
+REMOTEDIR="public_html"
+DEBUG="off"
+MIRROROPT="--reverse --dereference --no-symlinks --delete-first --verbose --dry-run"
+
+lftp  &lt;&lt;EOF
+set mirror:exclude-regex '.+\.bin|config'
+debug ${DEBUG}
+open -u ${USER},${PASS} ${SERVER}
+mirror ${MIRROROPT} ${LOCALDIR} ${REMOTEDIR}
+close
+EOF
+</pre>
+<p>こんな感じ。--dry-run をつけておくと実際には実行されない。
+--verbose も付けて、どう動作するか確認できたら、--verbose と --dry-run を
+外して、本番実行。
+</p>
+<p>最初、lftp に -c とか -f とかつけて動かなかったのだが、オプションを
+取っ払ったら動いたので、まぁ良し。
+</p>
+<h3>その他
+</h3>
+<p>常時接続環境なら cron で動かしても良いかも。
+</p>
+<p>常時接続でなくても fcron なんかを使えば起動時に実行とか指定できて
+便利。もちろん一般ユーザで実行できる。
+</p></body
+></html
+>

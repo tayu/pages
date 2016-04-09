@@ -1,0 +1,32 @@
+---
+layout: default
+---
+{% if rootpath == nil %}
+{% include path.liquid %}
+{% endif %}
+<div class="nohome">
+  <h1>日付順</h1>
+
+  <div class="date">
+  {% assign ym = "" %}
+  {% assign pym = "" %}
+  {% assign ym_fmt = "%Y-%b" %}
+
+  <ul class="posts">
+    {% for post in site.posts] %}
+    {% assign pym = post.date | date: ym_fmt %}
+    {% if ym != pym %}
+    {% assign ym = pym %}
+    <span class="date-date">
+      <h1><a id="{{ ym }}">{{ post.date | date: "%Y %b" }}</a></h1>
+    </span>
+    {% endif %}
+    <li>
+      <a class="post-link"
+	 href="{{ rootpath | append: post.url | prepend: site.baseurl }}">
+	{{ post.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  </div>
+</div>

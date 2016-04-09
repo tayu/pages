@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP"><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0," /><link rel="stylesheet" type="text/css" href="main.css" /><link rel="shortcut icon" href="favicon.ico" /><title>arrayingaush</title
+></head
+><body><h2>gaucheで行列
+</h2>
+<hr>
+<p><a href="http://qiita.com/naotor@github/items/72a66266a8494a1d105a">「Ruby力向上のための基礎トレーニング」をCommon Lispで解いてみた</a>
+を見て、Gauche で書いてみようと思った。
+</p>
+<p>で、試してみたけど、リスト操作でやるのがイマイチイメージできなかったのと、
+むしろ良くあるインデックスアクセスの方が簡単じゃないか、と思ったので、
+そっち方面から攻めてみた。
+</p>
+<h3>gauche.array を用いたスクリプト
+</h3>
+<p>以下の様になった
+</p>
+<pre>#!/usr/bin/env gosh
+;; -*- coding: utf-8 -*-
+(use gauche.array)
+
+(define INPUT
+  '((9 85 92 20)
+    (68 25 80 55)
+    (43 96 71 73)
+    (43 19 20 87)
+    (95 66 73 62)))
+
+(define INPUTA
+  #,(&lt;array&gt; (0 5 0 4) 9 85 92 20 68 25 80 55 43 96 71 73 43 19 20 87 95 66 73 62)
+  )
+
+(define OUTPUTA
+  (make-array (shape 0 6 0 5) 0)
+  )
+
+(define (main args)
+  (let ((x (array-length INPUTA 0)) (y (array-length INPUTA 1)))
+    (array-for-each-index
+     INPUTA
+     (lambda (i j)
+       (array-set! OUTPUTA i j (array-ref INPUTA i j))
+       (array-set! OUTPUTA x j
+                   (+ (array-ref OUTPUTA x j) (array-ref INPUTA i j)))
+       (array-set! OUTPUTA i y
+                   (+ (array-ref OUTPUTA i y) (array-ref INPUTA i j)))
+       (array-set! OUTPUTA x y
+                   (+ (array-ref OUTPUTA x y) (array-ref INPUTA i j)))
+       ))
+    )
+  (print "result: " OUTPUTA)
+  0)
+</pre>
+<p>for-each なループがあったので 2 重ループにしなくて済んだ。
+それでもアクセスは 2 次元として実行している。
+結果、見やすくなったと思う。
+</p>
+<h3>元ページについて
+</h3>
+<p>元ページのやり方を良く見てみた
+</p>
+<p>ポイントは「行を列に変換する」事。
+</p>
+<p>1 行を扱うのは通常のリスト処理と同じ。で、縦方向の処理は配列全体を
+裏返して横方向で処理できる様にする。
+</p>
+<p>あとは裏返しをもう一度実行して元に戻す。
+</p>
+<p>発想の飛躍具合はスゴいと思う。けど、効率とか。うーんってなる。
+</p>
+<p>sxml みたいな階層構造を持つデータ形式だと親和性が高いと思う。
+頂点を取り換えながら再帰するとか、自然に書けるし。
+</p></body
+></html
+>

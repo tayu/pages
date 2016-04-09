@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ site.description }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-{% assign urlpaths = page.url | split: '/' %}
-{% assign csspath = "/" %}
-{% assign limit = urlpaths.size | minus: 1 %}
-{% for i in (1..limit) %}
-  {% assign csspath = csspath | append: "../" %}
-{% endfor %}
-{% assign css = csspath | append: "css/main.css" %}
     <!-- Custom CSS -->
+    {% include path.liquid %}
+    {% assign css = rootpath | append: "css/main.css" %}
     <link rel="stylesheet" href="{{ css | prepend: site.baseurl }}">
 </head>

@@ -1,0 +1,44 @@
+
+ruby のインストール
+
+ apt-get install ruby
+
+gem は、
+・パッケージになっているものは apt-get でインストール
+・gem コマンドでインストール
+
+
+gem コマンドででのインストールは、基本、root で行う必要がある。
+これは /var 配下に書き込むため。（/usr/share だったかも）
+
+gem をユーザ領域にインストールするには、
+・GEM_HOME を設定する
+・.gemrc で設定する
+方法がある。必要なら PATH も通す
+
+
+確認するには、
+ $ gem environment
+して、INSTALLATION DIRECTORY: を見る
+
+
+
+.gemrc の設定
+gem: "--user-install"
+:update_sources: true
+:bulk_threshold: 1000
+:sources:
+- http://gems.rubyforge.org/
+- http://gemcutter.org
+:verbose: true
+:backtrace: false
+:benchmark: false
+
+gem: の行が必要
+
+
+
+・
+※ perl  でもユーザ両院にインストールできるらしい。local::lib を使う。
+
+

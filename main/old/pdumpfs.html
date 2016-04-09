@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP"><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0," /><link rel="stylesheet" type="text/css" href="main.css" /><link rel="shortcut icon" href="favicon.ico" /><title>pdumpfs</title
+></head
+><body><h2>pdumpfs について
+</h2>
+<hr>
+<h3>特徴
+</h3>
+<p>pdumpfs はバックアップツール。特徴は
+</p>
+<ul>
+  <li>変更があったファイルのみコピーする
+</li>
+  <li>変更が無いものはリンクする
+</li>
+  <li>リンクにより、同じファイルを 2 重に保存しないので、領域の節約になる
+</li>
+</ul>
+<p>辺り。
+</p>
+<h3>実装
+</h3>
+<p>Windows 用として有名なのは
+<a href="http://0xcc.net/pdumpfs/">pdumpfs: Plan9もどきのバックアップシステム</a>
+だろう。また、ここにある様に、別の実装もいくつかある。
+</p>
+<p>このサイトに有るように、元は Plan9 。リンク先のサイト内の
+<a href="http://plan9.aichi-u.ac.jp/fs/#main">解説</a>
+の通り、追記型の光ディスク（WORM）が大元。
+</p>
+<p>なので fs なんて付いてる。
+</p>
+<h3>経緯
+</h3>
+<p>Windows 用のバックアップツールを探していて、上記ツールに行き着いた。
+ただ、不満が有った。それは<strong>日単位</strong>でしかバックアップできないって
+こと。
+</p>
+<p>例えばアプリか何かを作成している場合。<br>
+関連するファイルは 1 つではないだろう。また、フォーマットにしても
+テキストだけでなく画像などのバイナリファイルも含まれるだろう。
+更には何らかのまとまり毎にフォルダに分けられているかもしれない。<br>
+そんなときに、作業の節目節目で全体を 1 セットとして保存しておきたいって
+のは、結構あるんじゃないだろうか。
+</p>
+<p>仮に、午後イチで入れた修正がうまくなかったなんて時、作業開始時の
+状態が丸っと保存してあれば、それをコピーして戻すだけで良い。
+</p>
+<p>こんな場合、日単位では大きすぎる。
+</p>
+<h3>作ってみた
+</h3>
+<p>最初は PowerShell で、次に VBS で作ってみた。
+ここではリンクを張るのに fsutil コマンドを使っていた。
+だけど、これ、管理者権限でないと起動すらしないモノだった。
+仕方なく管理者で動かす様にしていたけど、ちょっと不便だったし、
+外部コマンドの起動って事もあって結構遅かった。
+</p>
+<p>次に
+<a href="http://practical-scheme.net/gauche/index-j.html">Gauche(ゴーシュ)</a>
+で作ってみた。一応動作はするのだが、日本語のファイル名を
+うまく扱わせる方法がみつからなかった。
+</p>
+<p>で、最終手段。
+<a href="https://github.com/tayu/wintools/tree/master/bup">Windos の API で書く事に</a>
+した。
+</p>
+<p>まぁ、コンパイルする分、速度はそれなりに速いし、一般ユーザで
+動かせるので、そこそこ気に入っている。
+</p>
+<h3>感想
+</h3>
+<p>これまで、何度も実装して思う事。難度的には中位。
+新人研修の中盤の課題なんかに丁度良いんじゃないかな。
+</p>
+<h3>ポイント
+</h3>
+<p>プログラムを作る場合のポイントは 2 つ。
+</p>
+<ul>
+  <li>ディレクトリを再帰的に下りてゆくので、再帰で書くのが自然で書きやすい。
+</li>
+  <li>NTFS ではシンボリックリンクが使える。その為の API が用意されている。
+</li>
+  <li>圧縮属性の扱いとか、ファイルの時刻の違いとか、気になるなら対応する。
+</li>
+</ul>
+<p>こんな感じで
+</p></body
+></html
+>

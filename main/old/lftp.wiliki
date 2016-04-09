@@ -1,0 +1,92 @@
+* lftp でミラーリング
+
+某所の HP を更新するのに [http://lftp.yar.ru/ lftp] を使う
+----
+
+ここで雑多な話をするのもどうかと思うので、
+そちらは別にした。アップロードが ftp なので、
+ローカルとのミラーリングをすることにした。
+
+で、何を使おうかな、と考えた。
+
+
+** lftp を選んだ経緯
+まぁ、[http://sourceforge.jp/projects/ffftp/ FFFTP] や
+[http://sourceforge.jp/projects/filezilla/ FileZilla] でも良いのだけど、
+Linux 上で書いているので、スクリプト 1 発がやはり便利。
+
+以前は mirror ってスクリプトを使っていたけど、今は Debian には無かった。
+ほぼ同じもので ftpmirror ってのもあって、こちらは今もパッケージが
+ある。
+
+何となく、最初から探してみたくて検索してたら、
+バックアップなら [http://rsync.samba.org/ rsync] って
+感じが多かった。
+ただ、動作を考えてみたら、これって結局サーバ側で
+協調して動くrsync daemon が必要だよなぁ。
+
+で、途中で lftp でミラーしてるって記述が有ったので試してみる事に。
+
+
+** lftp の印象
+とにかく豊富なコマンド群。しかも半ば shell としても使える、との事。
+これでスクリプトが書けるかなぁ？
+
+
+** lftp でスクリプト
+試してみたら、実行できた。
+
+例えば、以下の様なスクリプトを作る
+{{{
+#! /usr/bin/lftp -f
+echo "connect to SERVER"
+open -u USER,PASS SERVER
+get SOMEFILE
+close
+!ls
+}}}
+lftp に "-f" を指定する都合上、/usr/bin/env は使えない。
+上記の例ではサーバに接続してファイルを取得する他に、
+内部コマンドの echo 、外部コマンドの ls を実行している。
+
+
+** lftp でスクリプト（ヒアドキュメント）
+前項の形式でも良いのだが、個人的な好みとして、設定をなるべく固めて
+おきたいってのがある。大抵はファイルの先頭で変数に設定する。
+
+で、調べたら、lftp には変数が無かった。いや、変数は有るのだが、
+それはあらかじめ作成済みの、動作オプションだった。
+
+なので、結局ふつーのスクリプトとして作成した。
+{{{
+#! /bin/sh
+SERVER="www.example.com"
+USER="username"
+PASS="userpass"
+LOCALDIR="htdocs"
+REMOTEDIR="public_html"
+DEBUG="off"
+MIRROROPT="--reverse --dereference --no-symlinks --delete-first --verbose --dry-run"
+
+lftp  <<EOF
+set mirror:exclude-regex '.+\.bin|config'
+debug ${DEBUG}
+open -u ${USER},${PASS} ${SERVER}
+mirror ${MIRROROPT} ${LOCALDIR} ${REMOTEDIR}
+close
+EOF
+}}}
+こんな感じ。--dry-run をつけておくと実際には実行されない。
+--verbose も付けて、どう動作するか確認できたら、--verbose と --dry-run を
+外して、本番実行。
+
+最初、lftp に -c とか -f とかつけて動かなかったのだが、オプションを
+取っ払ったら動いたので、まぁ良し。
+
+
+** その他
+常時接続環境なら cron で動かしても良いかも。
+
+常時接続でなくても fcron なんかを使えば起動時に実行とか指定できて
+便利。もちろん一般ユーザで実行できる。
+

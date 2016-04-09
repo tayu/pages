@@ -4,7 +4,7 @@ title:  "分岐"
 categories: sh
 tags: selection
 ---
-{% include path.md %}
+{% include path.liquid %}
 
 # 単純な if 文
 形式は `if ～ else ～ fi` となる。

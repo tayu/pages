@@ -1,0 +1,37 @@
+<header class="side-header">
+  <nav class="side-nav">
+
+    <a class="post-link"
+       href="{{ rootpath | append: "allpost/" | prepend: site.baseurl }}">
+      全記事</a>
+  <hr/>
+  カテゴリ
+  <ul>
+    {% for category in site.categories  %}
+    <li>
+      <a href="{{ rootpath | append: "categories/" | prepend: site.baseurl }}#{{ category.first.}}">
+	{{ category.first }}</a>
+      ({{ site.categories[category.first].size }})</li>
+    {% endfor %}
+  </ul>
+  <hr/>
+  日付
+  <ul>
+    {% assign ym = "" %}
+    {% assign pym = "" %}
+    {% assign ym_fmt = "%Y-%b" %}
+
+    {% for post in site.posts] %}
+    {% assign pym = post.date | date: ym_fmt %}
+    {% if ym != pym %}
+    {% assign ym = pym %}
+
+    <li>
+      <a href="{{ rootpath | append: "date/" | prepend: site.baseurl }}#{{ ym }}">
+	{{ post.date | date: "%Y %b" }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+
+</nav>
+</header>

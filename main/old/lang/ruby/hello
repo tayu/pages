@@ -1,0 +1,16 @@
+ruby の hello world
+
+
+スクリプトを作る
+
+行頭を
+#! /usr/bin/env ruby
+# coding: utf-8
+の様にする。2 行目は文字コードの指定
+
+表示には p または puts 辺りを使う
+
+p "hello world"
+puts "hello world"
+print "hello world"
+

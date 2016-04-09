@@ -1,0 +1,320 @@
+* coLinux について
+
+coLinux はどうなってしまうのだろう
+----
+** coLinux とは
+[http://www.colinux.org/ Cooperative Linux] は Windows 上で動く
+Linux のエミュレータである。
+
+注意！！。PC のエミュレータではない。
+つまり、QEMU や VMware や VirtualBox や Virtual PC とは違う。
+もちろん bochs とも。
+
+イメージとしては Linux カーネルをアプリケーションとして
+動かす感じ。エミュレーションの層が異なるので、PC エミュレータより
+かなり速く動く。例えば、ネットブックなんかでも実用になる位には速い。
+
+ネットワークアクセスには、TAP デバイスのドライバが付属していて、
+動作も早い。ただし、、、って話は後述。
+
+また、便利な機能として、Windows とのディレクトリ共有がある。
+つまり、Cygwin とか用意しなくても、本物の Linux のツールが
+使えるって事。キーボードの認識がうまく行かない場合があるので、
+接続は ssh がおすすめ。つまり coLinux 側に ssh をインストールし
+(sshd が自動で起動する）、
+Windows 側からは Teraterm 等で接続する。キーボードの認識とか
+日本語入力とかはこの方が安定してできる。
+(telnet でも同様だけど、なるべくなら ssh で）、
+
+サービスとして動かすこともできるので、web サーバを動かして
+wiki などの機能を提供するとか、内部用の DNS やら proxy やら smtp やらの
+サーバを動かすことなんかにも使える。
+
+変わった例として、実パーティションを使う事もできる。（後述）
+
+とにかく、windows 上で簡単に環境を作成し、捨てる事ができるので、
+何かのテスト環境を用意するとかが簡単にできる。
+
+Linux 上で Xen を動かすのに近いかも。
+
+
+問題は 32 bit の windows でしか動かない事。インストーラが拒否ってくる。
+
+個人的には TAP なんかのデバイスドライバ回りを捨てて、 i386 のまま
+32 bit アプリとして動かす事ができればなぁ、と思うのだが。
+
+
+** 現状
+動きが止まっている。
+
+外から見えた範囲で経過を追うと、
+- スポンサーが付いた
+- スポンサーが 64 bit 対応を求めている
+- 移植に注力した
+- 失敗
+- 停滞
+
+トップページの November 7, 2011 の項にある通り
+
+以前はリンクを辿った先に
+ デバドラがぁぁぁ。int のサイズがぁぁぁぁ。
+って嘆きがあったけど、今はそれも無くなってしまった模様。
+
+と、言うことで、2011 年から Linux カーネルを追えていない。
+あちらは 3.X 系になったがこちらは 2.6 のまま。
+まぁ、すぐに不整合が出る事は無いにしても、例えば fs の拡張などは
+使えない事になる。ext4 の先に ext5 が出たりするような場合には。
+カーネルの API は Posix 準拠で来たので、その範囲ではこれからも大丈夫なはず。
+
+
+** Tips
+*** インストール
+インストールとかは検索すると幾つかサイトが見つかるのでその通りで。
+注意点としては、一時、設定ファイルに xml を使ってた頃の説明があったり
+するので、それは古いって事は覚えておくと良い。
+
+基本は
+- coLinux をインストールする
+- root イメージをダウンロードする
+- 設定ファイルを作成し、カーネル、initrd 、root FS 等を指定して起動
+
+の手順
+
+
+*** ネットワーク
+多彩な方法が用意されている。付属の TAP 使用が一番速いらしい。
+その他にも
+- 別途 PCAP ライブラリをインストールして使う
+- 組み込みの slirp を使う
+- ndis-bridge を使う
+
+がある。
+
+個人的には slirp を薦める。ポート指定が煩雑だが、これを使うと
+一般ユーザ権限の中で動作が完結するので、複数を同時に起動させる
+事なんかが簡単にできる。
+
+slirp 限定にして 32 bit アプリとして 64 bit Windows で動かすとか
+出来そうな気がするのだが、どうだろう。
+
+
+*** ファイルの用意
+少し使い込んだら、ディスク領域が不足するとか、全くの新規環境が欲しいとかで
+新しいイメージファイルを用意する事もあると思う。
+
+windows 上で用意するファイルはサイズさえあればその他は問わない。共有ディレクトリ内で dd するとか、win 用 dd するとか。既存の、例えば動画ファイルを持ってきて
+使っても良い。
+
+使う前に mkfs すれば良いだけ。例えば、
+
+ hda3="new-hd.img"
+
+とかしていたら、coLinux 内で
+
+ # mkfs.ext4 /dev/hda3
+
+とする。その後
+
+ # mount /dev/hda3 /mnt
+
+とすればファイルの読み書きができる。
+
+
+**** qemu 付属の qemu-img.exe を使う
+windows 上で
+ > qemu-img create new-hd.img 2G
+とする。サイズ指定は適宜。
+
+sparse なファイルが出来上がる
+
+**** fsutil を使う
+windows 付属のコマンド。ただし、管理者権限が必要。
+sparse なファイルを作成させる。
+
+以下のようなバッチファイルを作成しておくと便利
+{{{
+set FILE="new-hd.img"
+set SIZE="4294967296"
+fsutil file createnew %FILE% %SIZE%
+fsutil sparse setflag %FILE%
+fsutil sparse setrange %FILE% 0 %SIZE%
+}}}
+カレントディレクトリを移動しておかないと、作成先が C:\Windows\System32 に
+なるので、注意
+
+
+**** その他、共通
+更に、ファイルのプロパティから圧縮属性を ON にするのもアリ。
+
+qemu のツールを使ってる事から推測できるように、できたファイルは
+他の PC エミュレータ（QEMU, VMware, VirtualBox）でも使える。
+
+
+*** Debian 限定。新規インストールを簡単に済ます
+提供された root FS イメージを信用しないワケではないけど。
+
+新規に'''本物'''の環境が欲しい場合、
+debootstrap を使う事で簡単に更地から環境構築できる。
+Ubuntu でも手順は同様に実行できるのだが、バージョンによっては起動に失敗する。
+
+前項と同様、
+
+ hda3="new-hd.img"
+
+として、coLinux を起動する。
+
+ # mkfs.ext4 /dev/hda3
+ # mount /dev/hda3 /mnt
+ # debootstrap --arch i386 wheezy /mnt http://cdn.debian.or.jp/debian/
+
+終了したら、ここからブートさせるために幾つか作業する。
+
+**** /etc/fstab の作成
+
+ # cp /etc/fstab /mnt/etc
+ # cd /mnt/etc/
+ # vi fstab
+
+などとして、既存を元にすると楽。fs の種類（ext3 か ext4 かなど）
+やパーティション番号（hda1 か hda3 かなど）を'''起動'''環境に
+合わせて記述する
+
+
+**** ネットワーク設定
+/etc/network/interfaces, /etc/resolv.conf, /etc/hostname, /etc/hosts を
+作成する。 基本は既存のコピー。
+
+起動後に eth0 が見つからない場合、udev の前回の認識が残っている可能性がある。
+ $ /sbin/ifconfig -a
+として、I/F が認識されていたら、/etc/udev/rules.d/ にある *-net.rules な
+ファイルを確認する。エントリが有ったら削除してリブートする。
+
+
+**** root のパスワードの設定
+chroot して作業する
+
+ # LANG=C chroot /mnt /bin/bash
+ # passwd
+
+/mnt/etc/passwd が更新される。
+
+
+**** 一般ユーザの作成
+必ずしも必要ではないが、公式のインストーラに倣って
+
+chroot したままで新規グループ、ユーザを作成する
+ # groupadd new-group
+ # useradd -m -g new-group new-user
+ # passwd new-user
+
+
+**** 新規 rootFS でブート
+coLinux の設定ファイルで hda1 とかに指定する
+
+起動して root で作業できるようになったら環境設定する
+
+
+*** ディレクトリ共有
+設定ファイルで
+ cofs0="share"
+とする。share というディレクトリはあらかじめ作っておく。フルパスが必要かも。
+
+起動後に
+ # mount /dev/cofs0 /mnt
+とすれば /mnt として読み書きできる。
+
+
+常用する場合は /etc/fstab に記述して、起動時にマウントさせると便利
+
+ /dev/cofs0 /home/new-user/win cofs  rw,relatime,sync,dirsync,gid=new-group,uid=new-user 0 0
+
+この例ではユーザのディレクトリに、そのユーザの権限でマウント
+させ、読み書きを許可している。また、ディスクキャッシュは windows 側のみを
+使うように Linux 側に同期（sync）指定している。relatime は noatime と
+同様、アクセス時刻の書き込み回避。
+
+ $ mkdir ~/win
+
+は起動前に実行しておく。（実行してからリブートする）
+
+
+
+*** 実パーティションを使う
+設定ファイルで
+ hda1="\Device\Harddisk0\Partition4"
+などとする。
+
+
+*** 簡易サービスモード
+特にサービスに登録しなくても ウインドウ非表示モードで起動すれば
+裏で動いてくれるので、表の邪魔をしない様にできる。
+この方法は一般ユーザ権限でできるので、特におすすめ。
+
+例えば、以下の様な VBScript のスクリプトで起動する
+{{{
+Option Explicit
+Const vbHide = 0
+
+Dim ws, eu
+Set ws = CreateObject( "WScript.Shell" )
+Set eu = ws.Environment( "User" )
+eu.Item( "COLINUX_CONSOLE_FONT" ) = "Lucida Console:12"
+eu.Item( "COLINUX_CONSOLE_EXIT_ON_DETACH" ) = "1"
+eu.Item( "COLINUX_NO_SMP_WORKAROUND" ) = "Y"
+ws.Run """C:\Program Files\coLinux\colinux-daemon.exe"" -v 3 -t nt @colinux.conf", vbHide, False
+Set eu = Nothing
+Set ws = Nothing
+}}}
+
+
+
+*** キーボード
+初期状態では英語キーボードになっている。
+
+Windows は日本語キーボードなので、どうかすると
+入力できない文字があったりする。あるいは入力はできるけど、
+全く別のキーからだったり。
+
+この辺で悩まなくて済む一番簡単な手は console を使わないこと。
+[http://sourceforge.jp/projects/ttssh2/ Tera Term] 等のターミナルソフト
+で接続する。
+
+キー入力は Windows のものが送られるので、Windows での入力と異なる事は無い。
+結果、悩まなくて済む。
+
+サービス、あるいは上項の様にウインドウ無しで動かす場合も便利。
+
+coLinux 側に telnetd か ssh 、使う方をインストールする。
+ssh は sshd がパッケージとして分離されていないので、ssh
+パッケージでクライアント＆サーバをインストールする事になる。
+まぁ、同一 PC 上で暗号化が必要とも思わないけど、使い方に慣れる
+意味で ssh 推奨。
+
+
+*** X Window System を使う
+本物の X を使ってみたくはないか？
+
+coLinux に X 関係のパッケージと日本語フォント回りをインストールすると、
+X の環境ができる。それに
+[http://sourceforge.net/projects/xming/ Xming X Server for Windows]
+を使って接続できる。
+
+VNC でも同じことはできるけど、coLinux 側で VNC サーバを立ち上げる
+手間が無い分、こちらが使いやすい。
+
+おすすめはウインドウマネージャを起動する方法。icewm を起動する様に設定して
+保存すると、以下の様な .xlaunch ファイルが作成される。
+{{{
+<?xml version="1.0"?>
+<XLaunch xmlns="http://www.straightrunning.com/XmingNotes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.straightrunning.com/XmingNotes XLaunch.xsd" WindowMode="Windowed" ClientMode="StartProgram" Program="icewm" ClientStart="PuTTY" PW="userpass" RemoteHost="127.0.0.1" RemoteUser="username" ExtraSSH="-X -P 22" Display="0" Clipboard="true" ExtraParams="-screen 0 800 600"/>
+}}}
+まぁ、ちょっとオプション指定が増えているけど。
+
+ssh で接続する様にしておくと使用するポートは 1 つだけで済む。slirp で
+リダイレクトの設定をしておいて、上記の「 -X -P 22」の設定と合わせて
+おけば良い。
+
+接続後に中で rxvt とか xterm とか KTerm とかを、いくつでも開けば良い。
+日本語入力回りは起動していないので、起動用のスクリプトを作るなりする。
+
+例えば Linux 上のブラウザでの見た目の確認とかに使えると思う。

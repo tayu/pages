@@ -16,16 +16,26 @@
             c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
         </svg>
       </a>
+
       <div class="trigger">
 
-	<a class="page-link" href="./lang/">
+	<a class="page-link"
+	   href="{{ rootpath | append: "old/" | prepend: site.baseurl }}">
+	  old</a>
+	<a class="page-link"
+	   href="{{ rootpath | append: "lang/" | prepend: site.baseurl }}">
 	  lang</a>
 
         {% for page in site.pages %}
-          {% if page.title %}<a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>{% endif %}
+        {% if page.title %}
+	<a class="page-link"
+	   href="{{ rootpath | append: page.url | prepend: site.baseurl }}">
+	  {{ page.title }}</a>
+	{% endif %}
         {% endfor %}
 
-	<a class="page-link" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+	<a class="page-link"
+	   href="{{ rootpath | append: "feed.xml" | prepend: site.baseurl }}">
 	  RSS</a>
 
       </div>

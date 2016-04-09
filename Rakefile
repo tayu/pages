@@ -27,3 +27,13 @@ task :up do
   sh "git commit -m '#{dt}'"
   sh "git push origin master"
 end
+
+task :pages do
+  cwd = ENV[ 'PWD' ]
+  sh "echo  '#{cwd}'"
+  chdir "../tayu.github.io"
+end
+
+task :gup => [ :pages, :up ] do
+end
+

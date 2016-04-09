@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP"><head><meta http-equiv="content-type" content="text/html; charset=UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1.0," /><link rel="stylesheet" type="text/css" href="main.css" /><link rel="shortcut icon" href="favicon.ico" /><title>markdown</title
+></head
+><body><h2>マークダウン
+</h2>
+<p>最初はマークダウンで書こうと思っていた。
+だけど止めたんだ。
+</p>
+<hr>
+<h3>マークダウンに手を出すまで
+</h3>
+<p>GitHub でホームページを始めるに当たって、考えたこと
+</p>
+<ul>
+  <li>html で書くのは面倒
+</li>
+  <li>DocBook も&lt;タグ&gt;で囲むのは同じだし、html と大差無い
+</li>
+  <li>wiki と似た記法でマークダウンってのがあるらしい
+</li>
+  <li>blog をマークダウンで書けるサイトが幾つかある。
+</li>
+  <li>実は某所でちょっとだけやってみた。
+</li>
+</ul>
+<p>ただ、blog は結局続けていない。理由は
+</p>
+<ul>
+  <li>最終的マークダウンになるのだが、入力はブラウザで WYSWYG になる
+</li>
+  <li>コードの入力が面倒
+</li>
+</ul>
+<p>ブラウザ上で入力し、見栄えを確認するためにリロードなんて事をやってて、
+効率が悪過ぎた。
+</p>
+<p>コードについては、、、。どうかしてるとしか思えない。
+</p>
+<p><strong>各行</strong>の行頭に<strong> 4 個</strong>のスペースとか、面倒過ぎ。
+「各行」で「4 個」と、二重にややこしい。そんなのいちいち数えてられない。
+</p>
+<p>いや、もちろん、キーボードマクロとか使えば簡単に出来はするけど。
+</p>
+<h3>GitHub でマークダウンを書く
+</h3>
+<p>GitHub のリポジトリに README.md というファイルを置くと、ディレクトリ
+表示時に説明として下にその内容が<strong>整形されて</strong>表示される。
+なので、一応マークダウンを書くようにはなった。
+</p>
+<p>その辺りで分かった事。GitHub は
+<a href="https://help.github.com/articles/github-flavored-markdown">GitHub Flavored Markdown</a> (GFM) として独自の拡張をしている。
+</p>
+<p>いや、上記の blog サイトでも「～に対応しました」とか
+「～が使えるようになりました」とかのアナウンスが有る事には
+気づいていた。
+</p>
+<p>つまり、各サイトが独自拡張をしてるって事。
+結局のところ、みんな使いにくいのだと思う。
+</p>
+<p>結局、方言が乱立していて、標準がどこにあるかもはっきりしない。
+この辺りで マークダウンを使う気がほぼ無くなった。
+</p>
+<h4>補足。GitHub のマークダウンについて
+</h4>
+<p>GitHub のマークダウンは魅力的だった。上記のコードブロックに
+ついては行で区分し、ソースをそのまま貼り付けられる様に拡張されていた。
+さらに言語指定して、文法に沿った色付けも実装されていた。
+こんな風に色々と拡張されていて、他より使い易い感じだった。
+</p>
+<p>なので、これが使えるなら使いたかった。
+</p>
+<p>結局使わなかったのは、ローカルで動かせるコンバータが
+見つからなかったから。修正の度に git でコミット＆アップロードでは
+非効率過ぎる。
+</p>
+<h3>で、結局どうしたか
+</h3>
+<p>記法については標準を探すのは止めた。そこで目の前にあったのがメモ用に使っていた
+<a href="http://practical-scheme.net/wiliki/wiliki.cgi">WiLiKi</a> だった。
+</p>
+<p>これで書く事に決めた。
+</p>
+<p>記法は決めたものの、コンバータが無い。ただ、WiLiKi はソース
+が有ったので、なんとか自作できないか、と考えた。
+で、ソースをしばらく眺めていて、WiLiKi 記法から html の
+生成部分だけを取り出せたので、それをスクリプトとした。
+</p>
+<p>これ以上時間を掛けて、書き出すのか遅くなるより、とにかく
+始めるべきって事で。
+</p>
+<h3>今後の課題
+</h3>
+<p>WiLiKi はデータを 1 個のデータベース(dbm) に保存する。
+なので、それを入力として、全ページを生成する方式が望ましいかもしれない。
+WiLiKi 本来の入力も使えるし。
+</p>
+<p>一応、過去には<a href="http://practical-scheme.net/wiliki/wiliki.cgi?WiLiKi%3A%E9%9D%99%E7%9A%84HTML%E3%81%B8%E3%81%AE%E5%A4%89%E6%8F%9B">有った</a>らしいのだが、
+今のバージョンでは動かなかった。
+</p>
+<h4>サブセットとは
+</h4>
+<p>マクロは使えない。目次や日付など、便利なものがあるのだが。
+</p></body
+></html
+>

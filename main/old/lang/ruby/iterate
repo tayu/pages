@@ -1,0 +1,52 @@
+繰り返し。いわゆるループ
+
+範囲式も参照
+
+times メソッド
+2.times {
+  p 1
+}
+
+each メソッド
+[1,2,3].each do |i| print i*2, "\n" end
+
+for 文
+for lhs ...  in 式 [do]
+  式..
+end
+
+
+while 文
+while 式 [do]
+   ...
+end
+
+while 修飾子
+式 while 式
+
+
+until 文
+until 式 [do]
+   ...
+end
+式が偽の間、実行する
+
+until 修飾子
+式 until 式
+
+
+
+break 文
+最も内側のループを脱出する
+
+next 文
+最も内側のループの次の繰り返しにジャンプする
+
+redo 文
+現在の繰り返しをやり直す
+
+
+
+
+
+

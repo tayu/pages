@@ -1,0 +1,27 @@
+---
+layout: default
+---
+{% if rootpath == nil %}
+{% include path.liquid %}
+{% endif %}
+<div class="nohome">
+  <h1>カテゴリ</h1>
+  <div class="category">
+    {% for category in site.categories %}
+    <span class="category-title">
+      <h1><a id="{{ category.first }}">{{ category.first }}</a></h1>
+    </span>
+    <ul class="posts">
+      {% for post in site.categories[category.first] %}
+      <li>
+	<a class="post-link"
+	   href="{{ rootpath | append: post.url | prepend: site.baseurl }}">
+	  {{ post.title }}</a>
+	<span class="post-date">
+	  {{ post.date | date: "%b %-d, %Y" }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+</div>

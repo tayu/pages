@@ -4,7 +4,7 @@ title:  "ハローワールド"
 categories: sh
 tags: helloworld
 ---
-{% include path.md %}
+{% include path.liquid %}
 # スクリプトを作成する
 
 [helloworld.sh]({{ rootpath | prepend: site.baseurl | append: "script/helloworld.sh" }})という名前のファイルを、以下の内容で作成する。

@@ -1,0 +1,37 @@
+分岐
+
+if 文
+if 式 [then]
+  式 ...
+[elsif 式 [then]
+  式 ... ]
+[else
+  式 ... ]
+end
+
+
+unless 文
+unless 式 [then]
+  式 ...
+[else
+  式 ... ]
+end
+条件式が偽の時に then 以下の 式を評価する
+
+case 文
+case [式]
+[when 式 [, 式] ...[, `*' 式] [then]
+  式..]..
+[when `*' 式 [then]
+  式..]..
+[else
+  式..]
+end
+when 節の最後の式に `*' を前置すると配列展開
+
+ary = [1,2,3]
+when *ary
+は
+when 1, 2, 3
+と展開される
+

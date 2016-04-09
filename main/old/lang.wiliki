@@ -1,0 +1,27 @@
+* 言語めも
+
+初歩の初歩。これ、どう書くんだったっけ
+----
+
+||テーマ||sh||
+||[http:lang/t-install.html インストール]||[http:lang/sh-install.html O]||
+||[http:lang/t-hello.html hello world]||[http:lang/sh-hello.html O]||
+||[http:lang/t-comment.html コメント]||[http:lang/sh-comment.html O]||
+||[http:lang/t-literal.html リテラル]||[http:lang/sh-literal.html O]||
+||[http:lang/t-variable.html 変数]||[http:lang/sh-variable.html O]||
+||[http:lang/t-sequence.html 連接]||[http:lang/sh-sequence.html O]||
+||[http:lang/t-selection.html 分岐]||[http:lang/sh-selection.html O]||
+||[http:lang/t-iterate.html 繰り返し]||[http:lang/sh-iterate.html O]||
+||[http:lang/t-function.html 関数／手続き]||[http:lang/sh-function.html O]||
+||[http:lang/t-commandline.html コマンドライン引数]||[http:lang/sh-commandline.html O]||
+||[http:lang/t-array.html 配列]||[http:lang/sh-array.html O]||
+||[http:lang/t-exec.html 外部プログラムの起動]||[http:lang/sh-exec.html O]||
+||[http:lang/t-input.html 入力]||[http:lang/sh-input.html O]||
+||[http:lang/t-file.html ファイル]||[http:lang/sh-file.html O]||
+||[http:lang/t-directory.html ディレクトリ]||[http:lang/sh-directory.html O]||
+||[http:lang/t-random.html ランダムウェイト]||[http:lang/sh-random.html O]||
+||[http:lang/t-time.html 時刻、日付]||[http:lang/sh-time.html O]||
+||[http:lang/t-tips.html 固有のTIPS]||[http:lang/sh-tips.html O]||
+||[http:lang/t-link.html 情報源]||[http:lang/sh-link.html O]||
+
+

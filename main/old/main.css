@@ -1,0 +1,77 @@
+
+body {
+    color: black;
+    background-color: MintCream;
+}
+
+h2 {
+    text-align: center;
+    font-size: 400%;
+    border-color: SkyBlue;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+    background-image: linear-gradient( to bottom, White, PaleTurquoise );
+}
+
+h3 {
+    padding-left: 0.5em;
+    font-size: 200%;
+    border-color: SkyBlue;
+    border-left: 0.5em solid DodgerBlue;
+    border-width: 1px 1px 1px 0.5em;
+    border-style: solid;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+    background-image: linear-gradient( to bottom, White, PaleTurquoise );
+}
+
+h4 {
+    padding-left: 0.5em;
+    font-size: 150%;
+    border-color: SkyBlue;
+    border-left: 0.5em solid DodgerBlue;
+    border-width: 0px 0px 1px 0.5em;
+    border-style: solid;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+    background-image: linear-gradient( to bottom, White, PaleTurquoise );
+}
+
+h5 {
+    padding-left: 0.5em;
+    font-size: 150%;
+    border-color: SkyBlue;
+    border-left: 0.5em solid DodgerBlue;
+    border-width: 0px 0px 1px 0.5em;
+    border-style: solid;
+    border-radius: 0.2em 0.2em 0.2em 0.2em;
+}
+
+h6 {
+    padding-left: 0.5em;
+    border-color: SkyBlue;
+    border-width: 0px 0px 1px 0px;
+    border-style: solid;
+}
+
+p:hover {
+    background-color: GhostWhite;
+}
+
+ul:hover {
+    background-color: GhostWhite;
+}
+
+
+a:link {
+    color: DarkGreen;
+}
+
+a:hover {
+    color: Peru;
+    background-color: AliceBlue;
+}
+
+pre {
+    background-color: AliceBlue;
+}
+

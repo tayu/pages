@@ -1,0 +1,177 @@
+* WiLiKi 記法から html への変換スクリプト
+
+----
+
+** スクリプト
+
+キーは
+ (srl:sxml->html (wiliki-parse iport))
+の呼び出し。ファイルあるいは文字列の入力から
+html 形式が得られる。
+
+あとは前後にちょっと足して html としての体裁を整えるだけ。
+
+で、スクリプトの全体は以下
+{{{
+#!/usr/bin/env gosh
+;; -*- coding: utf-8 -*-
+
+(use srfi-1)
+(use text.html-lite)
+(use text.tree)
+(use sxml.serializer)
+(use wiliki.parse)
+
+(define (conv2html iport title)
+  (display "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
+  (display (html-doctype :type :xhtml-1.0-strict))
+  (display
+   (tree->string
+    (html:html
+     :xmlns "http://www.w3.org/1999/xhtml"
+     :lang "ja-JP"
+     :xml:lang "ja-JP"
+     (html:head
+      (html:meta
+       :http-equiv "content-type"
+       :content "text/html; charset=UTF-8")
+      (html:meta
+       :name "viewport"
+       :content "width=device-width,initial-scale=1.0,")
+      (html:link
+       :rel "stylesheet"
+       :type "text/css"
+       :href "main.css")
+      (html:link
+       :rel "shortcut icon"
+       :href "favicon.ico")
+      (html:title (html-escape-string title)))
+     (html:body
+      (srl:sxml->html (wiliki-parse iport)))))))
+
+(define (base-name filename)
+  (define delm ".") ;; (define-constant ..) is error at here, ok at outside
+  (let ((names (string-split filename delm)))
+    (string-join (take names (- (length names) 1)) delm)))
+
+(define (main args)
+  (define (usage)
+    (format (current-error-port)
+            "Usage: ~a in-file out-file.\n" *program-name*)
+    (exit 2))
+
+  (if (null? (cdr args)) (usage))
+  (if (null? (cddr args)) (usage)) ;; use /dev/stdout to display console
+  (if (not (null? (cdddr args))) (usage))
+
+  (let ((ifile (cadr args)) (ofile (caddr args)))
+    (call-with-input-file ifile
+      (lambda (in)
+        (call-with-output-file  ofile
+          (lambda (out)
+            (with-output-to-port out
+              (lambda ()
+                (conv2html in (base-name ifile)))))))))
+  0)
+}}}
+
+
+** 使い方
+
+使い方は usage に有るように、
+ $ wiliki2html.scm in.wiliki out.html
+の様になる。（"$" はプロンプト。以下同様）オプションは無い。
+複数のファイルを扱うなら、シェルスクリプトを書くとか make を使うとかで。
+
+ちなみに、今使っているのは以下の様な makefile
+{{{
+CV		= wiliki2html.scm
+cvflags		=
+
+infiles		= index.wiliki memo.wiliki
+outfiles	= $(infiles:.wiliki=.html)
+
+
+all: $(outfiles)
+
+clean:
+	rm *.html
+
+up: update
+update: commit
+	git push origin master
+
+co: commit
+commit:
+	git commit -m "`date +'%F-%R'`" -a
+
+.SUFFIXES: .wiliki .html
+
+.wiliki.html:
+	$(CV) $(cvflags) $< $@
+}}}
+
+
+wilikifiles の項にソースを並べて行く。
+ $ make
+で html ファイルを生成する。
+
+ $ make co
+でコミット
+ $ make up
+で GitHub へアップロードする。また、その前にコミットもする。
+
+
+新規ファイルのリポジトリへの add は手動。html のみとする。
+
+その為に .gitignore に以下を登録しておく
+{{{
+makefile
+*.wiliki
+}}}
+
+
+
+** 補足
+
+*** 処理単位
+入力／出力は 1 ページ単位の扱いとなる。
+
+
+*** 制約
+
+マクロが使えない。特に wiki の個々のエントリへのリンクの様な
+機能が使えない。
+
+
+*** 元ソースの管理
+.wiliki ファイルは GitHub に上げないので、.git リポジトリには
+登録しない。とはいえ、ローカルでバージョン管理したい。
+
+別途 git リポジトリをつくるか、あるいは Mercurial でやるか思案中。
+
+
+
+** WiLiKi ソース
+入力例
+
+{{{
+* 日記とか
+----
+** 日記、備忘録、めも、その他
+
+- [http:pdumpfs.html バックアップツール pdumpfs]
+- [http:lang.html 言語めも]
+- [http:wiliki2html.html wiliki2html 変換スクリプト]
+- [http:markdown.html マークダウン]
+- [http:start.html 開始]
+- [http:memo.html めも]
+
+
+----
+[https://github.com/tayu/ その他]
+}}}
+
+----
+まだ、あきらめてはいない。dbm からの生成。もうちょっとでできそうな気が
+するんだけどなぁ。あるいは作者の人が・・・。
