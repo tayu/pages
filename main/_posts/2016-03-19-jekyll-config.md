@@ -1,9 +1,14 @@
 ---
 layout: post
-title:  "Jekyll: 設定"
-categories: jekyll memo
+title:  "Jekyll の設定"
+categories: jekyll config
 ---
-# 基本情報
+* TOC
+{:toc}
+
+設定関連で変更した項目
+
+# 情報源
 
 - [本家サイト](http://jekyllrb.com/)
 - [日本語](https://jekyllrb-ja.github.io/)
@@ -14,57 +19,50 @@ GitHub 上のドキュメントもあったはず。
 [Pygments](http://pygments.org/languages/)
 
 
-# 設定の調整
-
-## コードブロックの行番号とコードが近くて見にくい
-行番号は ```<span class="line-numbers">～</span>```の様に設定されている。
-ここに属性を指定してやる。
-
-css/main.css に以下を追記する
-
-```css
-.line-numbers {
-    padding-right: 0.5em;
-}
-```
 
 
-## テーブルの枠線が無い
-とりあえず、幅は 1 の実線とする
+# _config.yml
 
-css/main.css に以下を追記する
-
-```css
-table, td {
-    border: 1px solid gray;
-}
-```
-
-## 変換元の改行が `<br>` に変換される
-元ファイル中の改行は無視すると思っていたので、一寸驚いた。
+## 出力先の指定
+GitHub Pages の html 置き場に直接生成する。
 
 _config.yml に以下を追記する
+
+```yaml
+destination: ../../username.github.io
+```
+
+username は GitHub のアカウント名
+
+## ベース URL
+相対パスでアクセスする様、~.~を前置する。
+そういう用途のものではない気もするが。
+
+```yaml
+baseurl: "."
+```
+
+## マークダウンの書式
+GFM(GitHub Flavored Markdown) とする
+
+
+```yaml
+kramdown:
+  input: GFM
+```
+
+## .md ファイル中の改行を無視する
+ちょっと驚いた。
 
 ```yaml
 kramdown:
   hard_wrap: false
 ```
 
-Redcarpet 用の設定らしかったが、上記で効いてくれた。
-
-
 ## シンタックスハイライトのエンジンを指定する
-pygments を使う
-_config.yml に以下を追記する
+シンタックスハイライトには pygments を使う。
 
 ```yaml
 highlighter: pygments
 ```
 
-css を生成させる方法もあるらしい
-
-```shell
-$ pygmentize -a .highlight -S monokai -f html > css/monokai.css
-```
-
-似た記述が css/main.css に在るので、後で試してみよう
