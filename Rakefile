@@ -21,6 +21,7 @@ task :all => [ :lang, :main ] do
   puts 'done: gen all'
 end
 
+# up pages repository
 task :up do
   dt = sprintf( "%04d-%02d-%02d", Time.now.year, Time.now.month, Time.now.day )
   sh "git add --all"
@@ -29,11 +30,10 @@ task :up do
 end
 
 task :pages do
-  # cwd = ENV[ 'PWD' ]
-  # sh "echo  '#{cwd}'"
   chdir "../tayu.github.io"
 end
 
-task :gup => [ :pages, :up ] do
+# up GitHub pages
+task :pup => [ :pages, :up ] do
 end
 

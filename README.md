@@ -3,6 +3,6 @@
 jekyll で GitHub Pages を生成することにした。
 html は tayu.github.io に置かれるので、別管理にする。
 
+生成されたページは[ここから](http://tayu.github.io/)。
 
-環境整備と同時進行で日記化してみるかな
 
