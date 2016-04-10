@@ -13,10 +13,11 @@ layout: default
       {% assign pym = "" %}
       {% assign ym_fmt = "%Y-%b" %}
 
-      <ul>
+      <ul>{% comment %} この ul タグはダミー {% endcomment %}
 	{% for post in site.posts] %}
 	{% assign pym = post.date | date: ym_fmt %}
 	{% if ym != pym %}
+	{% assign ym = pym %}
       </ul>
       <h1><a id="{{ ym }}">{{ post.date | date: "%Y %b" }}</a></h1>
       <ul class="posts">
@@ -28,9 +29,6 @@ layout: default
 	  <span class="post-date">
 	    {{ post.date | date: "%b %-d, %Y" }}</span>
 	</li>
-	{% if ym != pym %}
-	{% assign ym = pym %}
-	{% endif %}
 	{% endfor %}
       </ul>
     </div>
