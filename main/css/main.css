@@ -219,19 +219,32 @@ a:visited { color: #205caa; }
   margin: 40px 0 20px;
 }
 
+.post-content h1 {
+    font-size: 180%;
+    border-bottom: medium solid Magenta;
+    border-left: solid 0.5em Aqua;
+    letter-spacing: -1.25px;
+}
+
 .post-content h2 {
-  font-size: 32px;
-  letter-spacing: -1.25px;
+    font-size: 160%;
+    border-bottom: thin solid Magenta;
+    border-left: solid 0.5em Aqua;
+    letter-spacing: -1.25px;
 }
 
 .post-content h3 {
-  font-size: 26px;
-  letter-spacing: -1px;
+    font-size: 140%;
+    border-bottom: thin dashed Magenta;
+    border-left: solid 0.3em Aqua;
+    letter-spacing: -1px;
 }
 
 .post-content h4 {
-  font-size: 20px;
-  letter-spacing: -1px;
+    font-size: 120%;
+    border-bottom: thin dotted Magenta;
+    border-left: solid 0.1em Aqua;
+    letter-spacing: -1px;
 }
 
 .post-content blockquote {
@@ -448,6 +461,35 @@ a:visited { color: #205caa; }
 .side-nav a {
     color: DarkGreen;
 }
+
+
+
+/* group */
+/* ----------------------------------------------------------*/
+.group-head h1 {
+    font-size: 180%;
+    color: DimGray;
+}
+
+.group-contents h1 a {
+    font-size: 100%;
+    color: DimGray;
+    border-bottom: thin dotted Magenta;
+    border-left: solid 0.2em Aqua;
+    line-height: 2.5;
+}
+.group-contents h1 a:hover {
+    text-decoration: none;
+}
+
+.group-contents ul {
+}
+.group-contents li {
+    list-style-type: none;
+    margin-bottom: 0.2em;
+}
+
+
 
 
 /* class: line-numbers */

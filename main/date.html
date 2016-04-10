@@ -4,29 +4,35 @@ layout: default
 {% if rootpath == nil %}
 {% include path.liquid %}
 {% endif %}
-<div class="nohome">
-  <h1>日付順</h1>
+<div class="group-home">
+  <div class="group-head">
+    <h1>日付順</h1>
 
-  <div class="date">
-  {% assign ym = "" %}
-  {% assign pym = "" %}
-  {% assign ym_fmt = "%Y-%b" %}
+    <div class="group-contents">
+      {% assign ym = "" %}
+      {% assign pym = "" %}
+      {% assign ym_fmt = "%Y-%b" %}
 
-  <ul class="posts">
-    {% for post in site.posts] %}
-    {% assign pym = post.date | date: ym_fmt %}
-    {% if ym != pym %}
-    {% assign ym = pym %}
-    <span class="date-date">
+      <ul>
+	{% for post in site.posts] %}
+	{% assign pym = post.date | date: ym_fmt %}
+	{% if ym != pym %}
+      </ul>
       <h1><a id="{{ ym }}">{{ post.date | date: "%Y %b" }}</a></h1>
-    </span>
-    {% endif %}
-    <li>
-      <a class="post-link"
-	 href="{{ rootpath | append: post.url | prepend: site.baseurl }}">
-	{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+      <ul class="posts">
+	{% endif %}
+	<li>
+	  <a class="post-link"
+	     href="{{ rootpath | append: post.url | prepend: site.baseurl }}">
+	    {{ post.title }}</a>
+	  <span class="post-date">
+	    {{ post.date | date: "%b %-d, %Y" }}</span>
+	</li>
+	{% if ym != pym %}
+	{% assign ym = pym %}
+	{% endif %}
+	{% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
