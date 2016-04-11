@@ -1,18 +1,17 @@
 # Site settings
 title: めもなど
 description: "作業めも等。日記、雑記、その他何でも"
+url: "http://tayu.github.io"
 
-# ABH
 ## サイト出力先
 destination: ../../tayu.github.io
 ## ベース URL
-## パーマリンクスタイル: Not pretty
-permalink: pretty
 baseurl: "."
+## パーマリンクスタイル
+permalink: pretty
 # Markdown レンダラ
 highlighter: pygments
 ## Markdown オプション: Kramdown
 kramdown:
   input: GFM
   hard_wrap: false
-
