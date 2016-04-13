@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Ruby リファレンスマニュアルをローカルで使う"
+title:  "Ruby リファレンスマニュアルをローカルで参照する"
 categories: ruby rubydoc
 ---
 * TOC
