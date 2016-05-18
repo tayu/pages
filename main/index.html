@@ -19,11 +19,12 @@ dis_char_num: 100
     {% endfor %}
   </ul>
 
-  <br/>
   <ul class="posts">
   {% if page.main_count < site.posts.size %}
     <span class="posts">
-    (more)...
+      <a class="post-link"
+	 href="{{ rootpath | append: "/allpost/" | prepend: site.baseurl }}">
+	(more...)</a>
     </span>
   {% endif %}
   </ul>
