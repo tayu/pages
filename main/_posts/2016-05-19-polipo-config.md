@@ -66,7 +66,7 @@ diskCacheWriteoutOnClose = 0
 その後、少し調べた結果
 
 - キャッシュさせないためには `maxDiskCacheEntrySize`
-- キャッシュさクリアさせるには `diskCacheUnlinkTime`
+- キャッシュをクリアさせるには `diskCacheUnlinkTime`
 
 を設定すれば良いことが分かった。
 
@@ -78,9 +78,14 @@ diskCacheWriteoutOnClose = 0
 maxDiskCacheEntrySize = 0
 diskCacheUnlinkTime = 0
 ```
+キャッシュクリアは次の cron.daily 時。
+
 
 # そもそもなぜ
 確か、polipo パッケージの説明にキャッシュしないって有ったはず。
 
 今、確認してみたら `caching web proxy` となっていた。
 どこかで変わったのだろうか。
+
+そうそう、polipo を使っている理由は別の proxy にリレーできる
+軽量なものが欲しかったから。データを溜めるのは LAN 内に 1 つあれば良い。
