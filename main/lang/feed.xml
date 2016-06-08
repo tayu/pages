@@ -5,26 +5,121 @@
     <description>プログラミング言語の超入門。または自分の学習の足跡として</description>
     <link>./</link>
     <atom:link href="./feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 21 May 2016 00:30:39 +0900</pubDate>
-    <lastBuildDate>Sat, 21 May 2016 00:30:39 +0900</lastBuildDate>
+    <pubDate>Wed, 08 Jun 2016 09:15:22 +0900</pubDate>
+    <lastBuildDate>Wed, 08 Jun 2016 09:15:22 +0900</lastBuildDate>
     <generator>Jekyll v2.2.0</generator>
     
       <item>
         <title>分岐</title>
         <description>
-&lt;h1 id=&quot;if-&quot;&gt;単純な if 文&lt;/h1&gt;
-&lt;p&gt;形式は &lt;code&gt;if ～ else ～ fi&lt;/code&gt; となる。&lt;/p&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#if-&quot;&gt;if 文&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section&quot;&gt;単純な形式&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot;&gt;または&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot;&gt;複数の場合&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#case-&quot;&gt;case 文&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;/home/mon/github/repository/pages/lang/_posts/2016-05-01-sh-selection.md&lt;/p&gt;
+&lt;h1 id=&quot;if-&quot;&gt;if 文&lt;/h1&gt;
+&lt;p&gt;形式は
+&lt;code&gt;if list; then list; [ elif list; then list; ] ... [ else list; ] fi&lt;/code&gt; 。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;./../../../../../script/selection.sh&quot;&gt;helloworld.sh&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section&quot;&gt;単純な形式&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/sh/selection.sh&quot;&gt;selection.sh&lt;/a&gt;&lt;/p&gt;
 
 &lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
   &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh
-&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;echo &amp;quot;Hello World&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;P=$(expr `date &#39;+%S&#39;` % 2)
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;if [ 0 = $P ]; then
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;hello .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;fi
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;条件が真なら、処理を実行する。&lt;/p&gt;
+
+&lt;p&gt;if ～ then 部分は 2 行に分けても良い。この辺のスタイルは好み。&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;if [ 0 = $P ]
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;then
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;hello .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;fi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;または&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/sh/selection2.sh&quot;&gt;selection2.sh&lt;/a&gt;&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;P=$(expr `date &#39;+%S&#39;` % 2)
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;if [ 0 = $P ]; then
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;hello .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;else
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;goodby .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;fi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;else 節を持つ。必ずどちらかの処理を通る。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;複数の場合&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/sh/selection3.sh&quot;&gt;selection3.sh&lt;/a&gt;&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;P=$(expr `date &#39;+%S&#39;` % 5)
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;if [ 0 = $P ]; then
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;hello .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;elif [ 1 = $P ]; then
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;goodby .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;elif [ 2 = $P ]; then
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;    echo &amp;quot;hi .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;else
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;strong&gt;&lt;a href=&quot;#n10&quot; name=&quot;n10&quot;&gt;10&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;    echo &amp;quot;ho .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n11&quot; name=&quot;n11&quot;&gt;11&lt;/a&gt;&lt;/span&gt;fi
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;複数の場合を持つ場合。ブロック if 文。
+条件判定の対象が同じなら case 文にしても同じ。&lt;/p&gt;
+
+&lt;h1 id=&quot;case-&quot;&gt;case 文&lt;/h1&gt;
+
+&lt;p&gt;形式は
+&lt;code&gt;case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac&lt;/code&gt; 。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/sh/selection10.sh&quot;&gt;selection10.sh&lt;/a&gt;&lt;/p&gt;
+
+&lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
+  &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n2&quot; name=&quot;n2&quot;&gt;2&lt;/a&gt;&lt;/span&gt;P=&amp;quot;$(expr `date &#39;+%S&#39;` % 5)&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n3&quot; name=&quot;n3&quot;&gt;3&lt;/a&gt;&lt;/span&gt;case $P in
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n4&quot; name=&quot;n4&quot;&gt;4&lt;/a&gt;&lt;/span&gt;    0 | 2 )
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n5&quot; name=&quot;n5&quot;&gt;5&lt;/a&gt;&lt;/span&gt;        echo &amp;quot;even .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n6&quot; name=&quot;n6&quot;&gt;6&lt;/a&gt;&lt;/span&gt;        ;;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n7&quot; name=&quot;n7&quot;&gt;7&lt;/a&gt;&lt;/span&gt;    1 | 3 )
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n8&quot; name=&quot;n8&quot;&gt;8&lt;/a&gt;&lt;/span&gt;        echo &amp;quot;odd .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt; &lt;a href=&quot;#n9&quot; name=&quot;n9&quot;&gt;9&lt;/a&gt;&lt;/span&gt;        ;;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;strong&gt;&lt;a href=&quot;#n10&quot; name=&quot;n10&quot;&gt;10&lt;/a&gt;&lt;/strong&gt;&lt;/span&gt;    * )
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n11&quot; name=&quot;n11&quot;&gt;11&lt;/a&gt;&lt;/span&gt;        echo &amp;quot;unknown .&amp;quot;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n12&quot; name=&quot;n12&quot;&gt;12&lt;/a&gt;&lt;/span&gt;        ;;
+&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n13&quot; name=&quot;n13&quot;&gt;13&lt;/a&gt;&lt;/span&gt;esac
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;実行部の終わりに、必ず &lt;code&gt;;;&lt;/code&gt; が必要。&lt;/p&gt;
+
+&lt;p&gt;その他のケースは &lt;code&gt;*&lt;/code&gt; と記述する。&lt;/p&gt;
+
+&lt;p&gt;pattern 部は文字列のマッチングなので、正規表現なども使える。
+また、変数展開も機能する。つまり、&lt;code&gt;&quot;$V&quot;&lt;/code&gt; などと書ける。&lt;/p&gt;
 
 </description>
         <pubDate>Sun, 01 May 2016 00:00:00 +0900</pubDate>
@@ -66,7 +161,7 @@
         <description>
 &lt;h1 id=&quot;section&quot;&gt;スクリプトを作成する&lt;/h1&gt;
 
-&lt;p&gt;&lt;a href=&quot;./../../../../../script/helloworld.sh&quot;&gt;helloworld.sh&lt;/a&gt;という名前のファイルを、以下の内容で作成する。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;./../../../../../script/sh/helloworld.sh&quot;&gt;helloworld.sh&lt;/a&gt;という名前のファイルを、以下の内容で作成する。&lt;/p&gt;
 
 &lt;div&gt;&lt;div class=&quot;CodeRay&quot;&gt;
   &lt;div class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line-numbers&quot;&gt;&lt;a href=&quot;#n1&quot; name=&quot;n1&quot;&gt;1&lt;/a&gt;&lt;/span&gt;#! /bin/sh

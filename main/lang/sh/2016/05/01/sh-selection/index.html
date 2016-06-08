@@ -76,19 +76,114 @@
     <h1>分岐</h1>
   </header>
   <article class="post-content">
-<h1 id="if-">単純な if 文</h1>
-<p>形式は <code>if ～ else ～ fi</code> となる。</p>
+<ul id="markdown-toc">
+  <li><a href="#if-">if 文</a>    <ul>
+      <li><a href="#section">単純な形式</a></li>
+      <li><a href="#section-1">または</a></li>
+      <li><a href="#section-2">複数の場合</a></li>
+    </ul>
+  </li>
+  <li><a href="#case-">case 文</a></li>
+</ul>
 
-<p>/home/mon/github/repository/pages/lang/_posts/2016-05-01-sh-selection.md</p>
+<h1 id="if-">if 文</h1>
+<p>形式は
+<code>if list; then list; [ elif list; then list; ] ... [ else list; ] fi</code> 。</p>
 
-<p><a href="./../../../../../script/selection.sh">helloworld.sh</a></p>
+<h2 id="section">単純な形式</h2>
+
+<p><a href="./../../../../../script/sh/selection.sh">selection.sh</a></p>
 
 <div><div class="CodeRay">
   <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>#! /bin/sh
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>echo &quot;Hello World&quot;
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>P=$(expr `date '+%S'` % 2)
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>if [ 0 = $P ]; then
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    echo &quot;hello .&quot;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>fi
 </pre></div>
 </div>
 </div>
+<p>条件が真なら、処理を実行する。</p>
+
+<p>if ～ then 部分は 2 行に分けても良い。この辺のスタイルは好み。</p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>if [ 0 = $P ]
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>then
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>    echo &quot;hello .&quot;
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>fi
+</pre></div>
+</div>
+</div>
+
+<h2 id="section-1">または</h2>
+
+<p><a href="./../../../../../script/sh/selection2.sh">selection2.sh</a></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>#! /bin/sh
+<span class="line-numbers"><a href="#n2" name="n2">2</a></span>P=$(expr `date '+%S'` % 2)
+<span class="line-numbers"><a href="#n3" name="n3">3</a></span>if [ 0 = $P ]; then
+<span class="line-numbers"><a href="#n4" name="n4">4</a></span>    echo &quot;hello .&quot;
+<span class="line-numbers"><a href="#n5" name="n5">5</a></span>else
+<span class="line-numbers"><a href="#n6" name="n6">6</a></span>    echo &quot;goodby .&quot;
+<span class="line-numbers"><a href="#n7" name="n7">7</a></span>fi
+</pre></div>
+</div>
+</div>
+<p>else 節を持つ。必ずどちらかの処理を通る。</p>
+
+<h2 id="section-2">複数の場合</h2>
+<p><a href="./../../../../../script/sh/selection3.sh">selection3.sh</a></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>#! /bin/sh
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>P=$(expr `date '+%S'` % 5)
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>if [ 0 = $P ]; then
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    echo &quot;hello .&quot;
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>elif [ 1 = $P ]; then
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>    echo &quot;goodby .&quot;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>elif [ 2 = $P ]; then
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>    echo &quot;hi .&quot;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>else
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    echo &quot;ho .&quot;
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>fi
+</pre></div>
+</div>
+</div>
+<p>複数の場合を持つ場合。ブロック if 文。
+条件判定の対象が同じなら case 文にしても同じ。</p>
+
+<h1 id="case-">case 文</h1>
+
+<p>形式は
+<code>case word in [ [(] pattern [ | pattern ] ... ) list ;; ] ... esac</code> 。</p>
+
+<p><a href="./../../../../../script/sh/selection10.sh">selection10.sh</a></p>
+
+<div><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="#n1" name="n1">1</a></span>#! /bin/sh
+<span class="line-numbers"> <a href="#n2" name="n2">2</a></span>P=&quot;$(expr `date '+%S'` % 5)&quot;
+<span class="line-numbers"> <a href="#n3" name="n3">3</a></span>case $P in
+<span class="line-numbers"> <a href="#n4" name="n4">4</a></span>    0 | 2 )
+<span class="line-numbers"> <a href="#n5" name="n5">5</a></span>        echo &quot;even .&quot;
+<span class="line-numbers"> <a href="#n6" name="n6">6</a></span>        ;;
+<span class="line-numbers"> <a href="#n7" name="n7">7</a></span>    1 | 3 )
+<span class="line-numbers"> <a href="#n8" name="n8">8</a></span>        echo &quot;odd .&quot;
+<span class="line-numbers"> <a href="#n9" name="n9">9</a></span>        ;;
+<span class="line-numbers"><strong><a href="#n10" name="n10">10</a></strong></span>    * )
+<span class="line-numbers"><a href="#n11" name="n11">11</a></span>        echo &quot;unknown .&quot;
+<span class="line-numbers"><a href="#n12" name="n12">12</a></span>        ;;
+<span class="line-numbers"><a href="#n13" name="n13">13</a></span>esac
+</pre></div>
+</div>
+</div>
+<p>実行部の終わりに、必ず <code>;;</code> が必要。</p>
+
+<p>その他のケースは <code>*</code> と記述する。</p>
+
+<p>pattern 部は文字列のマッチングなので、正規表現なども使える。
+また、変数展開も機能する。つまり、<code>"$V"</code> などと書ける。</p>
 
 </article>
 </div>
