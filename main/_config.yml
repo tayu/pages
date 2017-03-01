@@ -9,9 +9,27 @@ destination: ../../tayu.github.io
 baseurl: "."
 ## パーマリンクスタイル
 permalink: pretty
-# Markdown レンダラ
+
+# select syntax highlight engine
 highlighter: pygments
-## Markdown オプション: Kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
+# select Markdown engine
+markdown: kramdown
+
+# Kramdown options
+kramdown-hold:
+  input			: GFM
+  hard_wrap		: false
+  auto_ids		: true
+  entity_output		: as_char
+  toc_levels		: 1..2
+  parse_block_html	: true
+
+
+# ToDo
+#   bask のシンタックスハイライトが効かない
+#     yaml や java 等は効く。一覧のページ(http://pygments.org/languages/) の
+#     Other markup だから？ Demo ページでは変換できるのだが
+#     redcarpe だと bash は認識する。が、インデントがおかしくなるし、
+#     目次ができない
+#       2017/03/01
+
