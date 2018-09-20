@@ -212,3 +212,9 @@ Audio: IEEE Float 48000Hz stereo 3072kbps [A: pcm_f32le, 48000 Hz, 2 channels, f
 つまり、mplayer がデフォルトで出力する wav の品質が上がった為に、
 出力されるバイト数が増えて 2G を超えたため、今回の現象になったものらしい。
 
+
+
+# その後の展開
+
+[新しい展開]({% post_url 2018-09-20-audio-convert %})があった
+

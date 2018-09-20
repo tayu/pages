@@ -16,7 +16,7 @@ highlighter: pygments
 markdown: kramdown
 
 # Kramdown options
-kramdown-hold:
+kramdown:
   input			: GFM
   hard_wrap		: false
   auto_ids		: true
@@ -26,7 +26,7 @@ kramdown-hold:
 
 
 # ToDo
-#   bask のシンタックスハイライトが効かない
+#   bash のシンタックスハイライトが効かない
 #     yaml や java 等は効く。一覧のページ(http://pygments.org/languages/) の
 #     Other markup だから？ Demo ページでは変換できるのだが
 #     redcarpe だと bash は認識する。が、インデントがおかしくなるし、
