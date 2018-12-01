@@ -177,3 +177,19 @@ lame-3.100/libmp3lame のみに存在: .deps
 
 
 ただ、stdin に限るのか、など、議論して決めるべき点もありそう。
+
+
+
+# ToDo: あれ、オプションがある？
+
+lame --longhelp してみると、
+
+
+```
+--ignorelength  ignore file length in WAV header
+```
+
+なんてオプションがある。これは Ver. 3.99.5 （Debian LTS の stable）には無い。
+
+ひょっとして、対処済み？
+
