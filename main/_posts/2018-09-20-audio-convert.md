@@ -4,7 +4,7 @@ title:  "mp3 ファイルへの変換が 90 分で止まる（解決？編）"
 categories: audio convert
 ---
 
-[前回]({% post_url 2018-09-20-audio-convert %})の続き
+[前回]({% post_url 2018-09-20-audio-convert %})の続き。
 
 * TOC
 {:toc}
@@ -12,7 +12,7 @@ categories: audio convert
 
 # 簡単なまとめ
 
-mp3 に変換すると 90 分までしか変換してくれない
+mp3 に変換すると 90 分までしか変換してくれない。
 
 いろいろ調べてみて、pipe で渡している wav ファイルのヘッダ情報の中の
 サイズ情報が不正なのだろうと見当をつけた。
