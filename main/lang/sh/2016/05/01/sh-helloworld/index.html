@@ -15,16 +15,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     
     <link rel="stylesheet" href="./../../../../../css/main.css">
 
@@ -80,32 +70,23 @@
 
 <p><a href="./../../../../../script/sh/helloworld.sh">helloworld.sh</a>という名前のファイルを、以下の内容で作成する。</p>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>#! /bin/sh
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>echo &quot;Hello World&quot;
-</pre></div>
-</div>
-</div>
+<pre><code class="language-shell">#! /bin/sh
+echo "Hello World"
+</code></pre>
 
 <h1 id="section-1">実行属性をつける。</h1>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ chmod u+x helloworld.sh
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>$ ls -F helloworld.sh
-<span class="line-numbers"><a href="#n3" name="n3">3</a></span>helloworld.sh*
-</pre></div>
-</div>
-</div>
+<pre><code class="language-console">$ chmod u+x helloworld.sh
+$ ls -F helloworld.sh
+helloworld.sh*
+</code></pre>
 <p>-F を指定した場合、実行属性が設定されていると、ファイル名の後ろに ‘*’ が付く。</p>
 
 <h1 id="section-2">実行する</h1>
 
-<div><div class="CodeRay">
-  <div class="code"><pre><span class="line-numbers"><a href="#n1" name="n1">1</a></span>$ ./helloworld.sh
-<span class="line-numbers"><a href="#n2" name="n2">2</a></span>Hello World
-</pre></div>
-</div>
-</div>
+<pre><code class="language-console">$ ./helloworld.sh
+Hello World
+</code></pre>
 </article>
 </div>
 
